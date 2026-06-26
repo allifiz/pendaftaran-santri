@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		@apply bg-slate-100 text-slate-900 antialiased;
+	}
+
+	::selection {
+		@apply bg-emerald-200 text-emerald-950;
+	}
+}
+
+@layer components {
+	.surface-panel {
+		@apply rounded-3xl border border-white/70 bg-white/85 shadow-xl backdrop-blur;
+	}
+}
