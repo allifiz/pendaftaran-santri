@@ -6,61 +6,363 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
+# Pendaftaran Santri
 
-## About Laravel
+Aplikasi web untuk mengelola proses pendaftaran santri baru secara online.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Project ini dibuat menggunakan Laravel 11, Laravel Breeze, Blade, Tailwind CSS, Alpine.js, dan Vite.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Fitur Utama
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* Landing page informasi pesantren
+* Autentikasi user
+* Role user:
 
-## Learning Laravel
+  * Admin
+  * Staff
+  * Wali Santri
+* Pendaftaran santri oleh wali
+* Riwayat pendaftaran wali santri
+* Manajemen data pendaftaran oleh admin/staff
+* Update status pendaftaran
+* Manajemen informasi/blog pesantren
+* Komentar pada informasi untuk user yang sudah login
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Teknologi yang Digunakan
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+* PHP 8.2+
+* Laravel 11
+* Laravel Breeze
+* Blade Template
+* Tailwind CSS
+* Alpine.js
+* Vite
+* SQLite / MySQL
+* Composer
+* Node.js & NPM
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Persyaratan Awal
 
-## Laravel Sponsors
+Pastikan sudah menginstall:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+* PHP versi 8.2 atau lebih baru
+* Composer
+* Node.js
+* NPM
+* Git
+* SQLite atau MySQL
 
-### Premium Partners
+Cek versi:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```bash
+php -v
+composer -V
+node -v
+npm -v
+git --version
+```
 
-## Contributing
+## Cara Install Project
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Clone repository:
 
-## Code of Conduct
+```bash
+git clone https://github.com/allifiz/pendaftaran-santri.git
+cd pendaftaran-santri
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Install dependency Laravel:
 
-## Security Vulnerabilities
+```bash
+composer install
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Install dependency frontend:
 
-## License
+```bash
+npm install
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Copy file environment:
+
+```bash
+cp .env.example .env
+```
+
+Generate application key:
+
+```bash
+php artisan key:generate
+```
+
+## Konfigurasi Database
+
+Secara default, project ini bisa menggunakan SQLite.
+
+Buat file database SQLite:
+
+```bash
+touch database/database.sqlite
+```
+
+Lalu pastikan konfigurasi `.env` seperti ini:
+
+```env
+DB_CONNECTION=sqlite
+```
+
+Jalankan migration:
+
+```bash
+php artisan migrate
+```
+
+Jika ingin menggunakan MySQL, ubah konfigurasi `.env` menjadi seperti ini:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=pendaftaran_santri
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Lalu buat database terlebih dahulu:
+
+```sql
+CREATE DATABASE pendaftaran_santri;
+```
+
+Kemudian jalankan migration:
+
+```bash
+php artisan migrate
+```
+
+## Storage Link
+
+Jalankan command berikut agar file upload di storage bisa diakses dari folder public:
+
+```bash
+php artisan storage:link
+```
+
+## Menjalankan Project
+
+Jalankan server Laravel:
+
+```bash
+php artisan serve
+```
+
+Jalankan Vite untuk asset frontend:
+
+```bash
+npm run dev
+```
+
+Buka aplikasi di browser:
+
+```txt
+http://127.0.0.1:8000
+```
+
+## Menjalankan Semua Sekaligus
+
+Project ini sudah memiliki script `dev` dari Composer untuk menjalankan beberapa proses sekaligus:
+
+```bash
+composer run dev
+```
+
+Script ini akan menjalankan:
+
+* Laravel server
+* Queue listener
+* Laravel Pail/log viewer
+* Vite dev server
+
+## Build Asset untuk Production
+
+Untuk membuat asset production:
+
+```bash
+npm run build
+```
+
+## Testing
+
+Jalankan testing Laravel:
+
+```bash
+php artisan test
+```
+
+Atau:
+
+```bash
+vendor/bin/phpunit
+```
+
+## Struktur Folder Penting
+
+```txt
+app/
+├── Http/
+│   ├── Controllers/
+│   └── Middleware/
+├── Models/
+
+database/
+├── migrations/
+├── seeders/
+└── database.sqlite
+
+resources/
+├── views/
+├── css/
+└── js/
+
+routes/
+├── web.php
+└── auth.php
+
+public/
+storage/
+```
+
+## Role Aplikasi
+
+### Admin / Staff
+
+Admin dan staff dapat mengelola:
+
+* Data informasi pesantren
+* Data pendaftaran santri
+* Status pendaftaran santri
+
+### Wali Santri
+
+Wali santri dapat:
+
+* Melakukan pendaftaran santri
+* Melihat riwayat pendaftaran
+* Melihat detail status pendaftaran
+
+## Akun Login
+
+Jika project menggunakan seeder, jalankan:
+
+```bash
+php artisan db:seed
+```
+
+Jika belum ada seeder akun default, buat akun melalui halaman register terlebih dahulu, lalu sesuaikan role user langsung dari database.
+
+## Command yang Sering Dipakai
+
+Clear cache:
+
+```bash
+php artisan optimize:clear
+```
+
+Refresh database dari awal:
+
+```bash
+php artisan migrate:fresh
+```
+
+Refresh database dan jalankan seeder:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+Jalankan queue:
+
+```bash
+php artisan queue:listen
+```
+
+Lihat route yang tersedia:
+
+```bash
+php artisan route:list
+```
+
+## Troubleshooting
+
+### Halaman tidak berubah setelah edit CSS/JS
+
+Jalankan ulang Vite:
+
+```bash
+npm run dev
+```
+
+### Error `APP_KEY` kosong
+
+Jalankan:
+
+```bash
+php artisan key:generate
+```
+
+### Error database tidak ditemukan
+
+Jika menggunakan SQLite, pastikan file ini sudah ada:
+
+```txt
+database/database.sqlite
+```
+
+Jika belum ada, buat dengan:
+
+```bash
+touch database/database.sqlite
+php artisan migrate
+```
+
+### Error file upload tidak muncul
+
+Jalankan:
+
+```bash
+php artisan storage:link
+```
+
+### Error permission di Linux/Ubuntu
+
+Jalankan:
+
+```bash
+chmod -R 775 storage bootstrap/cache
+```
+
+Jika masih error:
+
+```bash
+sudo chown -R $USER:www-data storage bootstrap/cache
+```
+
+## Catatan Pengembangan
+
+Project ini masih bisa dikembangkan lagi, seperti:
+
+* Dashboard statistik pendaftaran
+* Export data pendaftaran ke PDF/Excel
+* Upload dokumen persyaratan santri
+* Notifikasi email/WhatsApp
+* Verifikasi pembayaran
+* Filter data berdasarkan status pendaftaran
+* Halaman profil pesantren yang lebih lengkap
+
+## Lisensi
+
+Project ini menggunakan lisensi MIT.
+
+## Author
+
+Dibuat oleh [allifiz](https://github.com/allifiz).
